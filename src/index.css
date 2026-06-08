@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  body{
+    @apply bg-black text-white relative font-sans h-screen overflow-x-hidden;
+  }
+
+}
+
+@layer utilities {
+  .animate-scan {
+    animation: scan 3s linear infinite;
+  }
+
+  .animate-noise {
+    animation: noise 0.2s infinite;
+  }
+
+  .animate-reverse-spin {
+    animation: reverse-spin 3s linear infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-priority-flow {
+    animation: priority-flow 2s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes scan {
+    0% { top: 0; }
+    50% { top: 100%; }
+    100% { top: 0; }
+  }
+
+  @keyframes noise {
+    0%, 100% { transform: translate(0,0); }
+    10% { transform: translate(-1%,-1%); }
+    20% { transform: translate(-2%,1%); }
+    30% { transform: translate(1%,-2%); }
+    40% { transform: translate(-1%,2%); }
+    50% { transform: translate(-2%,-1%); }
+    60% { transform: translate(2%,1%); }
+    70% { transform: translate(1%,1%); }
+    80% { transform: translate(-1%,-1%); }
+    90% { transform: translate(1%,-2%); }
+  }
+
+  @keyframes reverse-spin {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes priority-flow {
+    0%   { transform: translateX(-100%); opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+  }
+}
