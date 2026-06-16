@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: guardian-vision
+    env: node
+    plan: free
+    buildCommand: npm run build:fullstack
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: MASTER_ADMIN_EMAIL
+        sync: false
+      - key: MASTER_ADMIN_PASSWORD
+        sync: false
+      - key: GUARDIAN_STREAM_TOKEN
+        sync: false
+      - key: SURGE_RATE_THRESHOLD
+        value: "0.05"

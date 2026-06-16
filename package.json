@@ -9,8 +9,10 @@
     "dev:server": "npm --prefix server run dev",
     "dev:all": "concurrently -n server,client -c green,cyan \"npm --prefix server run dev\" \"vite\"",
     "build": "vite build",
+    "build:fullstack": "npm install && npm --prefix server install && npm run build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server/index.js"
   },
   "dependencies": {
     "@splinetool/react-spline": "^4.1.0",

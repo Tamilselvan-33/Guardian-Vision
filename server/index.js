@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors     = require('cors');
 const path     = require('path');
 const net      = require('net');
+const fs       = require('fs');
 const { spawn } = require('child_process');
 require('dotenv').config();
 
@@ -589,5 +590,19 @@ app.delete('/api/resolve/:type/:id/clear', async (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────────
+// Serve the built React app from the same deployment as the API.
+// Build the frontend first with `npm run build`, then start this server.
+const clientDistPath = path.join(__dirname, '..', 'dist');
+const clientIndexPath = path.join(clientDistPath, 'index.html');
+
+if (fs.existsSync(clientIndexPath)) {
+  app.use(express.static(clientDistPath));
+  app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(clientIndexPath);
+  });
+} else {
+  console.warn(`[STATIC] Frontend build not found at ${clientDistPath}. Run "npm run build" before production start.`);
+}
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Guardian Server running on port ${PORT}`));
